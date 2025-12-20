@@ -1,0 +1,17 @@
+[project]
+name = "AHSimulation"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dora-rs>=0.3.11",
+    "loop-rate-limiters>=1.1.2",
+    "mink>=0.0.11",
+    "mujoco>=3.3.2",
+    "onshape-to-robot>=1.7.5",
+    "qpsolvers[quadprog]>=4.7.1",
+]
+
+[project.scripts]
+AHSimulation = "mj_mink_right.main:main"
