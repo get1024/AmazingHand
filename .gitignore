@@ -14,3 +14,5 @@ Dev/CVCursor/models
 Dev/HandTracking/Src/HandTracking.egg-info
 Dev/AHSimulation/Src/AHSimulation.egg-info
 Dev/out/
+
+out/

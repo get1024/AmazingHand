@@ -16,7 +16,7 @@ from mink.contrib import TeleopMocap
 from pathlib import Path
 import numpy as np
 
-ROOT_PATH = Path(os.path.dirname(os.path.abspath(__file__))).parent
+ROOT_PATH = Path(os.path.dirname(os.path.abspath(__file__)))
 
 
 class Client:
@@ -27,7 +27,7 @@ class Client:
 
 
         self.model = mujoco.MjModel.from_xml_path(
-            f"{ROOT_PATH}/AHSimulation/AH_Left/mjcf/scene.xml"
+            (ROOT_PATH / "AH_Left/mjcf/scene.xml").as_posix()
         )
         # self.data=mujoco.MjData(self.model)
 
@@ -129,7 +129,7 @@ class Client:
         """TODO: Add docstring."""
         with mujoco.viewer.launch_passive(self.model, self.data) as viewer:
 
-            rate = RateLimiter(frequency=1000.0)
+            rate = RateLimiter(frequency=500.0)
             # dt = rate.dt
             # t = 0
             self.configuration.update_from_keyframe("zero")

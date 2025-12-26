@@ -209,8 +209,6 @@ pip install -e AHSimulation
     hand_tracker: WARN   daemon::pending    node exited before initializing dora connection
     INFO   daemon    dataflow finished on machine `3d1370b4-a125-4ced-a58c-a80850d6bb87` 
     INFO   coordinator    dataflow finished
-
-
     [ERROR]
     Dataflow 019b55ec-cd64-77bf-b681-82421d30f4d8 failed:
 
@@ -221,7 +219,6 @@ pip install -e AHSimulation
 
     Location:
         C:\Users\DELL\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\dora-core-0.3.13\src\descriptor\mod.rs:237:9
-
 
     There are 2 consequential errors. Check the `out/019b55ec-cd64-77bf-b681-82421d30f4d8` folder for full details.
 

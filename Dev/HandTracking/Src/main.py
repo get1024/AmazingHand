@@ -178,6 +178,8 @@ def main():
 
     pa.array([])  # initialize pyarrow array
     cap = cv2.VideoCapture(0)
+    # 强制 OpenCV 只保留最新的帧，避免因处理速度低于帧率而导致的图像积压和延迟。
+    cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
 
     with mp_hands.Hands(
             model_complexity=0,

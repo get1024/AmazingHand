@@ -9,7 +9,7 @@ nodes:
 
   - id: hand_simulation_r
     build: pip install -e AHSimulation
-    path: AHSimulation/AHSimulation/mj_mink_right.py
+    path: AHSimulation/Src/mj_mink_right.py
     inputs:
       r_hand_quat: move_angle/hand_quat
       tick: dora/timer/millis/2
@@ -20,7 +20,7 @@ nodes:
 
   - id: hand_simulation_l
     build: pip install -e AHSimulation
-    path: AHSimulation/AHSimulation/mj_mink_left.py
+    path: AHSimulation/Src/mj_mink_left.py
     inputs:
       l_hand_quat: move_angle/hand_quat
       tick: dora/timer/millis/2

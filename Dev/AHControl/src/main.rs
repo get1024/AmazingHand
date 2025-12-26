@@ -108,6 +108,9 @@ fn main() -> Result<(), Box<dyn Error>> {
         // DoraNode::init_from_node_id(NodeId::from("hand_controller".to_string()))?;
         DoraNode::init_from_env()?;
 
+    let mut motors_ids: Vec<u8> = Vec::with_capacity(16);
+    let mut motors_goalpos: Vec<f64> = Vec::with_capacity(16);
+
     while let Some(event) = events.recv() {
         match event {
             Event::Input { id, metadata, data } => match id.as_str() {
@@ -117,8 +120,8 @@ fn main() -> Result<(), Box<dyn Error>> {
                     let buffer: &[f64] = buffer.values();
                     // println!("data: {:?}", buffer);
 
-                    let mut motors_ids: Vec<u8> = Vec::new();
-                    let mut motors_goalpos: Vec<f64> = Vec::new();
+                    motors_ids.clear();
+                    motors_goalpos.clear();
 
                     for (_idx, finger) in motors.iter().enumerate() {
                         // println!("conf: {:?} {:?}", idx, finger.finger_name);
@@ -126,13 +129,13 @@ fn main() -> Result<(), Box<dyn Error>> {
                         if let Some(Parameter::ListInt(finger1_idx)) =
                             metadata.parameters.get(&finger.finger_name)
                         {
-                            println!(
-                                "metadata: name: {:?} idx {:?} data: {:?} {:?}",
-                                finger.finger_name,
-                                finger1_idx,
-                                buffer[finger1_idx[0] as usize],
-                                buffer[finger1_idx[1] as usize]
-                            );
+                            // println!(
+                            //     "metadata: name: {:?} idx {:?} data: {:?} {:?}",
+                            //     finger.finger_name,
+                            //     finger1_idx,
+                            //     buffer[finger1_idx[0] as usize],
+                            //     buffer[finger1_idx[1] as usize]
+                            // );
                             // controller.sync_write_goal_position(
                             //     &[finger.motor1.id, finger.motor2.id],
                             //     &[

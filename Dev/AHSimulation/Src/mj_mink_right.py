@@ -16,7 +16,7 @@ from mink.contrib import TeleopMocap
 from pathlib import Path
 import numpy as np
 
-ROOT_PATH = Path(os.path.dirname(os.path.abspath(__file__))).parent.parent
+ROOT_PATH = Path(os.path.dirname(os.path.abspath(__file__)))
 
 
 class Client:
@@ -27,7 +27,7 @@ class Client:
 
 
         self.model = mujoco.MjModel.from_xml_path(
-            (ROOT_PATH / "AHSimulation/Src/AH_Right/mjcf/scene.xml").as_posix()
+            (ROOT_PATH / "AH_Right/mjcf/scene.xml").as_posix()
         )
         # self.data=mujoco.MjData(self.model)
 
@@ -36,13 +36,18 @@ class Client:
 
         self.posture_task = mink.PostureTask(self.model, cost=1e-2)
 
+        # lm_damping 是Mujoco Mink 逆运动学（IK）求解器的阻尼参数，
+        # 阻尼过高会使求解器为了保持稳定性而限制关节速度，导致仿真
+        # 手在尝试“追赶”手部动作时显得非常迟缓和滞后。
         if mode=='pos':
+            # pos 是位置控制模式，lm_damping 设为 0.05 是为了在保持稳定性的同时
+            # 允许仿真手“追赶”手部动作，而不是立即响应。
             self.task1 = mink.FrameTask(
                 frame_name='tip1',
                 frame_type="site",
                 position_cost=1.0,
                 orientation_cost=0.0,
-                lm_damping=1.0,
+                lm_damping=0.05,
             )
 
             self.task2 = mink.FrameTask(
@@ -50,7 +55,7 @@ class Client:
                 frame_type="site",
                 position_cost=1.0,
                 orientation_cost=0.0,
-                lm_damping=1.0,
+                lm_damping=0.05,
             )
 
             self.task3 = mink.FrameTask(
@@ -58,7 +63,7 @@ class Client:
                 frame_type="site",
                 position_cost=1.0,
                 orientation_cost=0.0,
-                lm_damping=1.0,
+                lm_damping=0.05,
             )
 
             self.task4 = mink.FrameTask(
@@ -66,9 +71,10 @@ class Client:
                 frame_type="site",
                 position_cost=1.0,
                 orientation_cost=0.0,
-                lm_damping=1.0,
+                lm_damping=0.05,
             )
-        elif mode=='quat': #we control the orientation
+        elif mode=='quat': 
+            # quat 是姿态/朝向控制 。IK 求解器只关心指尖的 朝向 (旋转角度) 是否与目标一致，不关心指尖具体在空间中的哪个点
             self.task1 = mink.FrameTask(
                 frame_name='tip1',
                 frame_type="site",
@@ -129,7 +135,7 @@ class Client:
         """TODO: Add docstring."""
         with mujoco.viewer.launch_passive(self.model, self.data) as viewer:
 
-            rate = RateLimiter(frequency=1000.0)
+            rate = RateLimiter(frequency=500.0)
             # dt = rate.dt
             # t = 0
             self.configuration.update_from_keyframe("zero")
@@ -217,11 +223,11 @@ class Client:
                         viewer.sync()
 
                         # Rudimentary time keeping, will drift relative to wall clock.
-                        time_until_next_step = self.model.opt.timestep - (
-                            time.time() - step_start
-                        )
-                        if time_until_next_step > 0:
-                            time.sleep(time_until_next_step)
+                        # time_until_next_step = self.model.opt.timestep - (
+                        #     time.time() - step_start
+                        # )
+                        # if time_until_next_step > 0:
+                        #     time.sleep(time_until_next_step)
 
                     elif event_id == "pull_position":
                         self.pull_position(self.node, event["metadata"])
@@ -229,7 +235,7 @@ class Client:
 
                     elif event_id == "tick_ctrl":
                         if len(self.metadata)>0:
-                            print(f"Sending joints pos: {self.motor_pos[:3]}...")
+                            # print(f"Sending joints pos: {self.motor_pos[:3]}...")
                             self.node.send_output("mj_r_joints_pos", pa.array(self.motor_pos), self.metadata)
                         # self.pull_position(self.node, event["metadata"])
 
@@ -240,8 +246,12 @@ class Client:
                     elif event_id == "write_goal_position":
                         self.write_goal_position(event["value"])
                     elif event_id == "hand_pos" or event_id == "r_hand_pos":
-                        print(f"Received hand pos: {event['value']}")
-                        self.write_mocap_pos(event["value"])
+                        # print(f"Received hand pos: {event['value']}")
+                        try:
+                            self.write_mocap_pos(event["value"])
+                            # print(f"Updated mocap: {self.data.mocap_pos[0]}")
+                        except Exception as e:
+                            print(f"Error updating mocap: {e}")
                     elif event_id == "r_hand_quat":
                         self.write_mocap_quat(event["value"])
 
