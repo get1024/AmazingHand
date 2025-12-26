@@ -151,9 +151,9 @@ def create_gif_from_folder(image_folder, output_gif_path, duration=100, loop=0):
 if __name__ == "__main__":
     # 配置区域
     # 1. 输入和输出设置
-    INPUT_FOLDER = "/Users/ryanjoy/Desktop/Project/AmazingHand/Dev/PrintVLog"                 # 视频所在的文件夹 (默认为当前文件夹)
-    OUTPUT_FOLDER = "."      # GIF输出保存的文件夹
-    TEMP_FOLDER_BASE = "temp_frames"   # 临时存放图片的文件夹
+    INPUT_FOLDER = r"D:\AAA-personalData\project\AmazingHand\Docs\TestVlog"                 # 视频所在的文件夹 (默认为当前文件夹)
+    OUTPUT_FOLDER = r"D:\AAA-personalData\project\AmazingHand\Docs\TestVlog"      # GIF输出保存的文件夹
+    TEMP_FOLDER_BASE = r"D:\AAA-personalData\project\AmazingHand\Docs\TestVlog\temp_frames"   # 临时存放图片的文件夹
     
     # 支持的视频格式
     VIDEO_EXTENSIONS = ['*.mp4', '*.mov', '*.avi', '*.mkv']
