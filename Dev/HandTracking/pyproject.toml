@@ -1,0 +1,14 @@
+[project]
+name = "HandTracking"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.9,<=3.12"
+dependencies = [
+    "dora-rs>=0.3.11",
+    "loop-rate-limiters>=1.1.2",
+    "mediapipe>=0.10.14",
+]
+
+[project.scripts]
+HandTracking = "hand_tracker.main:main"

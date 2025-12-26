@@ -1,0 +1,42 @@
+# Config for the right index finger1
+[Fingers]
+[[motors]]
+finger_name="r_finger1"
+motor1.id = 1
+motor1.offset = 0.12217304763960307
+motor1.invert = false
+motor1.model = "SCS0009"
+motor2.id = 2
+motor2.offset = 0.08726646259971647
+motor2.invert = false
+motor2.model = "SCS0009"
+[[motors]]
+finger_name="r_finger2"
+motor1.id = 3
+motor1.offset = 0.0
+motor1.invert = false
+motor1.model = "SCS0009"
+motor2.id = 4
+motor2.offset = 0.12217304763960307
+motor2.invert = false
+motor2.model = "SCS0009"
+[[motors]]
+finger_name="r_finger3"
+motor1.id = 5
+motor1.offset = 0.08726646259971647
+motor1.invert = false
+motor1.model = "SCS0009"
+motor2.id = 6
+motor2.offset = 0.12217304763960307
+motor2.invert = false
+motor2.model = "SCS0009"
+[[motors]]
+finger_name="r_finger4"
+motor1.id = 7
+motor1.offset = 0.0
+motor1.invert = false
+motor1.model = "SCS0009"
+motor2.id = 8
+motor2.offset = 0.12217304763960307
+motor2.invert = false
+motor2.model = "SCS0009"

@@ -1,4 +1,16 @@
 # Ignore large files
 **.mp4
 **/.DS_Store
-机械手材料/
+
+Dev/target
+Dev/Cargo.lock
+
+**/__pycache__
+
+**.exe
+
+Dev/CVCursor/models
+
+Dev/HandTracking/Src/HandTracking.egg-info
+Dev/AHSimulation/Src/AHSimulation.egg-info
+Dev/out/
