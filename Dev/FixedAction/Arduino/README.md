@@ -9,7 +9,6 @@ Make sure to first install Arduino librairie "SCServo".
 Use Feetech software to set IDs :
 [https://github.com/Robot-Maker-SAS/FeetechServo/tree/main/feetech%20debug%20tool%20master/FD1.9.8.2)
 
-
 # Summary in English (tutorial link is in french...)
 
 ## Wiring for link mode to change IDs of servos :
@@ -35,5 +34,3 @@ Rx arduino pin connected to Tx pin on TTLinker / Tx arduino pin connected to Rx 
 ![Arduino_Mega_PortCom](../assets/Arduino_Mega.jpg)
 
 Rx and Tx pin used on arduino Mega are RX1 & TX1 (19 & 18)
-
-

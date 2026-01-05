@@ -1,4 +1,2 @@
-Tutorial for settings IDs with Feetech Software, and Serial bus driver : [https://www.robot-maker.com/forum/tutorials/article/168-brancher-et-controler-le-servomoteur-feetech-sts3032-360/]
-
-
-Use Feetech software to set IDs : [https://github.com/Robot-Maker-SAS/FeetechServo/tree/main/feetech%20debug%20tool%20master/FD1.9.8.2)] 
+- 使用 Feetech 软件设置 ID 及串行总线驱动教程：[https://www.robot-maker.com/forum/tutorials/article/168-brancher-et-controler-le-servomoteur-feetech-sts3032-360/]
+- 通过 Feetech 软件设置 ID：[https://github.com/Robot-Maker-SAS/FeetechServo/tree/main/feetech%20debug%20tool%20master/FD1.9.8.2]、已经下载到 **[本地](../../../Tools/飞特舵机上位机软件/FD.exe)** 了
