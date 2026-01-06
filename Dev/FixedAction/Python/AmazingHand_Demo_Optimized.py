@@ -96,7 +96,8 @@ class AmazingHand:
     def Perfect(self):
         if (self.Side==1): #Right Hand
             self.Move_Index (50, -50, self.MaxSpeed)
-            self.Move_Middle (0, -0, self.MaxSpeed)
+            # self.Move_Middle (0, -0, self.MaxSpeed)
+            self.Move_Middle (-35,35, self.MaxSpeed)
             self.Move_Ring (-20, 20, self.MaxSpeed)
             self.Move_Thumb (65, 12, self.MaxSpeed)
 
