@@ -272,5 +272,5 @@ def Move_Thumb(Angle_1,Angle_2,Speed):
 if __name__ == '__main__':
     # main()
     OpenHand()
-    time.sleep(1)
-    CloseHand()
+    # time.sleep(1)
+    # CloseHand()

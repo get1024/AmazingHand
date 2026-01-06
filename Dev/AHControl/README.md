@@ -3,10 +3,12 @@
 电机配置在 TOML 文件中设置（参见 **[r_hand.toml](./config/r_hand.toml)**）。
 在该文件中可以设置电机的 ID，以及每根手指的角度偏移。
 
+- 使用 Feetech 软件设置 ID 及串行总线驱动教程：[https://www.robot-maker.com/forum/tutorials/article/168-brancher-et-controler-le-servomoteur-feetech-sts3032-360/]
+- 通过 Feetech 软件设置 ID：[https://github.com/Robot-Maker-SAS/FeetechServo/tree/main/feetech%20debug%20tool%20master/FD1.9.8.2]、已经下载到 **[本地](../../../Tools/飞特舵机上位机软件/FD.exe)** 了
+
 # 工具
 - **[change_id](./src/bin/change_id.rs)**：帮助你更改电机的 ID。使用 `cargo run --bin=change_id -- -h` 查看参数列表
 - **[goto](./src/bin/goto.rs)**：将单个电机移动到指定位置。使用 `cargo run --bin=goto -- -h` 查看参数列表
-- **get_zeros**：帮助设置电机零位，它会将电机置于柔顺模式并把 TOML 配置输出到控制台。使用 `cargo run --bin=get_zeros -- -h` 查看参数列表
 - **[get_zeros](./src/bin/get_zeros.rs)**：帮助设置电机零位，它会将电机置于柔顺模式并把 TOML 配置输出到控制台。使用 `cargo run --bin=get_zeros -- -h` 查看参数列表
 - **[set_zeros](./src/bin/set_zeros.rs)**：根据配置文件将机械手移动到“零位”。使用 `cargo run --bin=set_zeros -- -h` 查看参数列表
 

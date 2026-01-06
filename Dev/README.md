@@ -199,7 +199,7 @@ dora run dataflow_angle_simu.yml
 
 ## 3. 手部配置
 
-| ![Motors naming](/Docs/Assets/finger.png "Motors naming for each finger") | ![Fingers naming](/Docs/Assets/r_hand.png "Fingers naming for each hand") |
+| ![Motors naming](../Docs/Assets/finger.png "Motors naming for each finger") | ![Fingers naming](../Docs/Assets/r_hand.png "Fingers naming for each hand") |
 |:-:|:-:|
 | **_手指的舵机名称_** | **_每个手指的名称_** |
 
