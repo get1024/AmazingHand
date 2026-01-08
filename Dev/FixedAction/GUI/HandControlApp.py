@@ -3,6 +3,7 @@ import os
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
+import importlib
 
 # Add the Python directory to sys.path to import AmazingHand_Demo
 # This allows us to use the AmazingHand class we just refactored
@@ -11,16 +12,17 @@ python_dir = os.path.join(current_dir, '..', 'Python')
 sys.path.append(python_dir)
 
 try:
-    from AmazingHand_Demo_Optimized import AmazingHand
+    import AmazingHand_Demo_Optimized as ah_module
 except ImportError as e:
-    print(f"Error importing AmazingHand: {e}")
-    AmazingHand = None
+    print(f"Error importing AmazingHand_Demo_Optimized: {e}")
+    ah_module = None
 
 class HandControlApp:
     def __init__(self, root):
         self.root = root
         self.root.title("AmazingHand Control Panel")
         self.hand = None
+        self.ah_module = ah_module
         
         self.setup_ui()
         
@@ -48,6 +50,8 @@ class HandControlApp:
         # Connect Button
         self.connect_btn = ttk.Button(config_frame, text="Connect", command=self.toggle_connection)
         self.connect_btn.grid(row=0, column=7, padx=10)
+        self.reload_btn = ttk.Button(config_frame, text="Reload Code", command=self.reload_code)
+        self.reload_btn.grid(row=0, column=8, padx=5)
         
         # Gestures Frame
         self.gesture_frame = ttk.LabelFrame(self.root, text="Gestures", padding=10)
@@ -92,8 +96,6 @@ class HandControlApp:
             self.hand = None
             self.connect_btn.config(text="Connect")
             self.status_var.set("Disconnected")
-            # Note: Scs0009PyController doesn't have an explicit close/disconnect method, 
-            # so we just drop the reference.
         else:
             # Connect
             try:
@@ -101,15 +103,16 @@ class HandControlApp:
                 baud = self.baud_var.get()
                 side = self.side_var.get()
                 
-                if AmazingHand is None:
+                if self.ah_module is None:
                     messagebox.showerror("Error", "AmazingHand library not found! Check Python path.")
                     return
 
                 self.status_var.set(f"Connecting to {port}...")
                 self.root.update()
                 
+                self.ah_module = importlib.reload(self.ah_module)
                 # Instantiate the controller
-                self.hand = AmazingHand(port=port, baudrate=baud, side=side)
+                self.hand = self.ah_module.AmazingHand(port=port, baudrate=baud, side=side)
                 
                 self.connect_btn.config(text="Disconnect")
                 self.status_var.set(f"Connected to {port} (Side: {'Right' if side==1 else 'Left'})")
@@ -117,6 +120,23 @@ class HandControlApp:
                 messagebox.showerror("Connection Error", f"Could not connect:\n{str(e)}")
                 self.status_var.set("Connection Failed")
                 self.hand = None
+    
+    def reload_code(self):
+        try:
+            if self.ah_module is None:
+                messagebox.showerror("Error", "AmazingHand library not found! Check Python path.")
+                return
+            port = self.port_var.get()
+            baud = self.baud_var.get()
+            side = self.side_var.get()
+            self.ah_module = importlib.reload(self.ah_module)
+            if self.hand:
+                self.hand = None
+            self.hand = self.ah_module.AmazingHand(port=port, baudrate=baud, side=side)
+            self.status_var.set(f"Reloaded code and reconnected (Side: {'Right' if side==1 else 'Left'})")
+        except Exception as e:
+            messagebox.showerror("Reload Error", f"Could not reload:\n{str(e)}")
+            self.status_var.set("Reload Failed")
 
     def perform_gesture(self, method_name):
         if not self.hand:

@@ -170,7 +170,6 @@ class AmazingHand:
             self.Move_Thumb (75, 0, self.MaxSpeed)
     
     def Move_Index (self, Angle_1,Angle_2,Speed):
-        
         self.c.write_goal_speed(1, Speed)
         time.sleep(0.0002)
         self.c.write_goal_speed(2, Speed)
